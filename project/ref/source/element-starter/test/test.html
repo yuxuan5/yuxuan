@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3" id="box" style="height: 600px"></div>
+        <div class="col-lg-6" id="app" style="height: 600px"></div>
+        <div class="col-lg-3" id="bar" style="height: 600px"></div>
+    </div>
+</div>
+    <script src="../node_modules/echarts/dist/echarts.min.js"></script>
+    <script>
+        let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let box = echarts.init(document.getElementById('box'));
+        let chart = echarts.init(document.getElementById('app'));
+        let bar = echarts.init(document.getElementById('bar'));
+        let boxPlotOption = {
+            title: {},
+            color: ['#19a15f', '#277fc4'],
+            grid: {
+                right: 0
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function (param) {
+                    return [
+                        '类别' + param.name + ': ',
+                        'upper: ' + param.data[5],
+                        'Q3: ' + param.data[4],
+                        'median: ' + param.data[3],
+                        'Q1: ' + param.data[2],
+                        'lower: ' + param.data[1]
+                    ].join('<br/>');
+                }
+            },
+            xAxis: {
+                type: 'value',
+                name: 'kW·h',
+                position: 'bottom',
+                splitArea: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'category',
+                data: ['1', '2', '3', '4', '5', '6'],
+                boundaryGap: true,
+                // inverse: true,
+                nameGap: 30,
+                splitArea: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    formatter: '类别{value}',
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                }
+            },
+            series: {
+                name: 'boxplot',
+                type: 'boxplot',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (param) {
+                        return [
+                            '类别' + param.name + ': ',
+                            'upper: ' + param.data[5],
+                            'Q3: ' + param.data[4],
+                            'median: ' + param.data[3],
+                            'Q1: ' + param.data[2],
+                            'lower: ' + param.data[1]
+                        ].join('<br/>');
+                    }
+                },
+                data: [
+                    [0.1, 0.2, 0.3, 0.4, 0.5],
+                    [1, 1.2, 1.3, 1.4, 1.5],
+                    [2, 2.5, 3, 3.5, 4],
+                    [1, 1.2, 1.3, 1.4, 1.5],
+                    [3, 3.5, 4, 4.5, 5],
+                    [0.1, 0.2, 0.3, 0.4, 0.5]
+                ]
+            }
+        };
+        box.setOption(boxPlotOption);
+
+        let option = {
+            title: {},
+            color: ['#19a15f', '#277fc4'],
+            grid: {
+                left: 0,
+                right: 5
+            },
+            visualMap: {
+                show: false,
+                min: 0,
+                max: 1,
+                dimension: 2
+            },
+            xAxis: {
+                type: 'category',
+                data: months,
+                splitArea: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                show: false,
+                type: 'category',
+                data: ['1', '2', '3', '4', '5', '6'],
+                axisLabel: {
+                    formatter: '类别{value}'
+                },
+                splitArea: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            series: []
+        };
+        chart.setOption(option);
+        let heatData = [];
+        let monthHeatColor = [
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 58, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 0, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 55, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 55, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 112, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 166, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 166, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 224, 0, 0.1)'}, {offset: 1, color: 'rgba(240, 238, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(240, 238, 0, 0.1)'}, {offset: 0.5, color: 'rgba(224, 253, 0, 0.1)'}, {offset: 1, color: 'rgba(170, 225, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(170, 225, 0, 0.1)'}, {offset: 0.5, color: 'rgba(112, 196, 0, 0.1)'}, {offset: 1, color: 'rgba(184, 210, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(184, 210, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 224, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 170, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 170, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 112, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 58, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 58, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 0, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 54, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 54, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 112, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 166, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(255, 166, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 224, 0, 0.1)'}, {offset: 1, color: 'rgba(240, 238, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(240, 238, 0, 0.1)'}, {offset: 0.5, color: 'rgba(224, 253, 0, 0.1)'}, {offset: 1, color: 'rgba(239, 186, 0, 0.1)'}]}}},
+            {normal: {color: {type: 'linear', x: 0, x2: 1, colorStops: [{offset: 0, color: 'rgba(239, 186, 0, 0.1)'}, {offset: 0.5, color: 'rgba(255, 112, 0, 0.1)'}, {offset: 1, color: 'rgba(255, 58, 0, 0.1)'}]}}}
+        ];
+        for (let i = 0; i < 12; i++) {
+            for (let j = 0; j < 6; j++) {
+                heatData.push({value: [i, j, 1], itemStyle: monthHeatColor[i]});
+            }
+        }
+        let heatSeries = [{
+            name: 'series-pie',
+            type: 'heatmap',
+            coordinateSystem: 'cartesian2d',
+            blurSize: 6,
+            data: heatData
+        }];
+
+        let pieSeries = [];
+        let userClassWeight = [{
+            // 空置房
+            all: 1, peak: 1, ave: 1, extreme: 1, valley: 1,
+            monthWeight: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            cyclical: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        }, {
+            // 正常低用电量用户
+            all: 3, peak: 1, ave: 1, extreme: 1, valley: 3,
+            monthWeight: [3, 2, 1, 1, 1, 2, 2.5, 3, 1, 1, 2, 2.5],
+            cyclical: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }, {
+            // 正常高用电量用户
+            all: 5, peak: 1, ave: 1, extreme: 1, valley: 3,
+            monthWeight: [3, 2, 1, 1, 1, 2, 2.5, 3, 1, 1, 2, 2.5],
+            cyclical: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }, {
+            // 春节回家
+            all: 3, peak: 1, ave: 1, extreme: 1, valley: 3,
+            monthWeight: [3, 2, 1, 1, 1, 2, 2.5, 3, 1, 1, 2, 2.5],
+            cyclical: [1, 0.3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }, {
+            // 全年无波动，且用电量大
+            all: 5, peak: 5, ave: 3, extreme: 5, valley: 3,
+            monthWeight: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+            cyclical: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }, {
+            // 全年无波动，用电量小
+            all: 2, peak: 5, ave: 3, extreme: 5, valley: 1,
+            monthWeight: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            cyclical: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }];
+        for (let i = 0; i < 6; i++) {
+            let userWeight = userClassWeight[i];
+            for (let j = 0; j < 12; j++) {
+                let center = chart.convertToPixel({
+                    xAxisIndex: 0,
+                    yAxisIndex: 0
+                }, [j, i]);
+                let dayOfConsum = userWeight.cyclical[j] * 30;
+                pieSeries.push({
+                    type: 'pie',
+                    center: center,
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    radius: userWeight.all * userWeight.monthWeight[j],
+                    data: [{
+                        name: '峰',
+                        value: Math.round(userWeight.peak * userWeight.monthWeight[j]),
+                        itemStyle: {
+                            normal: {
+                                color: 'yellow'
+                            }
+                        }
+                    }, {
+                        name: '平',
+                        value: Math.round(userWeight.ave * userWeight.monthWeight[j]),
+                        itemStyle: {
+                            normal: {
+                                color: 'skyblue'
+                            }
+                        }
+                    }, {
+                        name: '尖',
+                        value: Math.round(userWeight.extreme * userWeight.monthWeight[j]),
+                        itemStyle: {
+                            normal: {
+                                color: 'orange'
+                            }
+                        }
+                    }, {
+                        name: '谷',
+                        value: Math.round(userWeight.valley * userWeight.monthWeight[j]),
+                        itemStyle: {
+                            normal: {
+                                color: 'green'
+                            }
+                        }
+                    }]
+                }, {
+                    type: 'pie',
+                    center: center,
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    radius: [10, 12],
+                    data: [{
+                        name: '工作',
+                        value: dayOfConsum,
+                        itemStyle: {
+                            normal: {
+                                color: '#cccccc'
+                            }
+                        }
+                    }, {
+                        name: '休息',
+                        value: 30-dayOfConsum,
+                        itemStyle: {
+                            normal: {
+                                color: '#ffffff'
+                            }
+                        }
+                    }]
+                });
+            }
+        }
+        chart.setOption({
+            series: [...heatSeries, ...pieSeries]
+        });
+
+        let barOption = {
+            title: {},
+            color: ['#19a15f', '#277fc4'],
+            grid: {
+                left: 0
+            },
+            xAxis: {
+                type: 'value',
+                position: 'bottom',
+                max: 10,
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'category',
+                // inverse: true,
+                data: ['1', '2', '3', '4', '5', '6'],
+                axisLabel: {
+                    formatter: '类别{value}'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#888'
+                    }
+                },
+                splitArea: {
+                    show: false
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{c}'
+            },
+            series: {
+                type: 'bar',
+                data: [2.5, 2.5, 2, 1, 1.5, 1]
+            }
+        };
+        bar.setOption(barOption);
+    </script>
+</body>
+</html>
