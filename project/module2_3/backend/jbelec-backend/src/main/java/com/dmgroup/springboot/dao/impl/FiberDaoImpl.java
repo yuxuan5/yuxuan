@@ -21,7 +21,7 @@ public class FiberDaoImpl implements FiberDao{
 	
 	@Override
 	public List<Fiber> findAll() {
-		return mongoTemplate.findAll(Fiber.class);
+		return mongoTemplate.findAll(Fiber.class,"fiber_light_path");
 	}
 
 	@Override

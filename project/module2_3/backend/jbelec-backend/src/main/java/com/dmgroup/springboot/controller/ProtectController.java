@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dmgroup.springboot.pojo.Station;
-import com.dmgroup.springboot.service.StationService;;
+import com.dmgroup.springboot.pojo.Protect;
+import com.dmgroup.springboot.service.ProtectService;
 
 @RestController
-@RequestMapping("/station")
-public class StationController {
+@RequestMapping("/protect")
+public class ProtectController {
 	@Autowired
-	private StationService stationService;
+	private ProtectService protectService;
 	
 	@RequestMapping("/find/all")
-	public List<Station> find(){
-		return stationService.findAll();
+	public List<Protect> find(){
+		return protectService.findAll();
 	}
 }

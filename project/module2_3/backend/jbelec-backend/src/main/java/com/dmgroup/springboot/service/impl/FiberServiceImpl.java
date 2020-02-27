@@ -11,7 +11,7 @@ import com.dmgroup.springboot.pojo.Fiber;
 import com.dmgroup.springboot.service.FiberService;
 
 @Service("fiberService")
-public class FiberServidelmpl implements FiberService{
+public class FiberServiceImpl implements FiberService{
 	@Autowired
 	private FiberDao fiberDao;
 	

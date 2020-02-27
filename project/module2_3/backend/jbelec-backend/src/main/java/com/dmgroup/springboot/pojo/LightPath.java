@@ -5,10 +5,6 @@ import java.util.List;
 
 public class LightPath implements Serializable{
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String LIGHT_PATH_NAME;
 	private String LIGHT_PATH_FULL_NAME;

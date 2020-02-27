@@ -11,7 +11,7 @@ import com.dmgroup.springboot.dao.StationDao;
 import com.dmgroup.springboot.service.StationService;
 
 @Service("stationService")
-public class StationServideImpl implements StationService {
+public class StationServiceImpl implements StationService {
 	
 	@Autowired
 	private StationDao stationDao;

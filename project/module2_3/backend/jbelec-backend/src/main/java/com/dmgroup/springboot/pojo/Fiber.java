@@ -25,7 +25,7 @@ public class Fiber implements Serializable{
 	private String AUUNIT;	
 	private List<Integer> STATIONS_ID;
 	private List<String> STATIONS_NAME;
-	private List<LightPath> LIGHT_PATH;
+	private List<List<LightPath>> LIGHT_PATH;
 
 
 	public String get_id() {
@@ -140,11 +140,11 @@ public class Fiber implements Serializable{
 		STATIONS_NAME = sTATIONS_NAME;
 	}
 
-	public List<LightPath> getLIGHT_PATH() {
+	public List<List<LightPath>> getLIGHT_PATH() {
 		return LIGHT_PATH;
 	}
 
-	public void setLIGHT_PATH(List<LightPath> lIGHT_PATH) {
+	public void setLIGHT_PATH(List<List<LightPath>> lIGHT_PATH) {
 		LIGHT_PATH = lIGHT_PATH;
 	}
 

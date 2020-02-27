@@ -17,13 +17,12 @@ public class FiberController {
 	
 	@RequestMapping("/find/all")
 	public List<Fiber> find(){
-		System.out.println("here");
+		//System.out.println("here");
 		return fiberService.findAll();
 	}
 	@RequestMapping("/find/one")
 	public Fiber findone(){
-		System.out.println("here");
+		//System.out.println("here");
 		return fiberService.getFiber(0);
-		//return fiberService.findAll();
 	}
 }
