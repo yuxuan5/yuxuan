@@ -9,13 +9,15 @@ public class Station implements Serializable{
 	
 	@Id
 	private String _id;
+	private int STATION_ID;	
 	private String STATION_NAME;
 	private String POWER_LEVEL;
 	private double x;
 	private double y;
 	
-	public Station(String _id, String STATION_NAME, String POWER_LEVEL, double x, double y) {
+	public Station(String _id, int STATION_ID, String STATION_NAME, String POWER_LEVEL, double x, double y) {
 		this._id = _id;
+		this.STATION_ID = STATION_ID;
 		this.STATION_NAME = STATION_NAME;
 		this.POWER_LEVEL = POWER_LEVEL;
 		this.x = x;
@@ -28,6 +30,14 @@ public class Station implements Serializable{
 	
 	public void set_id(String _id) {
 		this._id = _id;
+	}
+	
+	public int getSTATION_ID() {
+		return STATION_ID;
+	}
+	
+	public void setSTATION_ID(int STATION_ID) {
+		this.STATION_ID = STATION_ID;
 	}
 	
 	public String getSTATION_NAME() {
@@ -67,6 +77,6 @@ public class Station implements Serializable{
 	}
 	
 	public String toString() {
-		return "Station [_id=" + _id + ", STATION_NAME=" + STATION_NAME + ", POWER_LEVEL=" + POWER_LEVEL + ", x=" + x + ", y=" + y;
+		return "Station [STATION_ID=" + STATION_ID + ", STATION_NAME=" + STATION_NAME + ", POWER_LEVEL=" + POWER_LEVEL + ", x=" + x + ", y=" + y;
 	}
 }

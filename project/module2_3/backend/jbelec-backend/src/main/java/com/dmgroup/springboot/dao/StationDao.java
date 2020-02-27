@@ -10,7 +10,7 @@ public interface StationDao {
 	
 	List<Station> findALL();
 	
-	Station getStation(String _id);
+	Station getStation(int STATION_ID);
 	
 	void update(Station station);
 	
@@ -18,7 +18,7 @@ public interface StationDao {
 	
 	void insertAll(List<Station> stations);
 	
-	void remove(String _id);
+	void remove(int STATION_ID);
 	
 	List<Station> findByPage(Station station, Pageable pageable);
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="jbelec-backend/src/main/java"/>
+	<classpathentry kind="output" path="jbelec-backend/target/classes"/>
+</classpath>

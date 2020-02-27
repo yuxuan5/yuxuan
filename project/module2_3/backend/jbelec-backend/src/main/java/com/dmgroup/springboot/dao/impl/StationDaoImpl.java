@@ -26,9 +26,9 @@ public class StationDaoImpl implements StationDao {
 	}
 
 	@Override
-	public Station getStation(String _id) {
+	public Station getStation(int STATION_ID) {
 		
-		return mongoTemplate.findOne(new Query(Criteria.where("_id").is(_id)), Station.class);
+		return mongoTemplate.findOne(new Query(Criteria.where("STATION_ID").is(STATION_ID)), Station.class);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class StationDaoImpl implements StationDao {
 	}
 
 	@Override
-	public void remove(String _id) {
-		Criteria criteria = Criteria.where("_id").is(_id);
+	public void remove(int STATION_ID) {
+		Criteria criteria = Criteria.where("STATION_ID").is(STATION_ID);
 		Query query = new Query(criteria);
 		mongoTemplate.remove(query, Station.class);
 	}

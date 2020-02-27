@@ -23,9 +23,9 @@ public class StationServideImpl implements StationService {
 	}
 
 	@Override
-	public Station getStation(String _id) {
+	public Station getStation(int STATION_ID) {
 
-		return stationDao.getStation(_id);
+		return stationDao.getStation(STATION_ID);
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class StationServideImpl implements StationService {
 	}
 
 	@Override
-	public void remove(String _id) {
-		stationDao.remove(_id);
+	public void remove(int STATION_ID) {
+		stationDao.remove(STATION_ID);
 		
 	}
 
