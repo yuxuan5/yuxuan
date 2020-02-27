@@ -23,6 +23,4 @@ public class StationController {
 	public List<Station> find(){
 		return stationService.findAll();
 	}
-	
-
 }
