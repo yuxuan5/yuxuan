@@ -4,8 +4,7 @@
     </div>
 </template>
 <script>
-
-    import geoJson from 'echarts/map/json/NBmap.json'
+    import geoJson from '@/assets/Echarts/NBmap.json'
 
 export default{
     data() {
